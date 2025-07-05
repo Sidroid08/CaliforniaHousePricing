@@ -1,0 +1,65 @@
+name: Deploy Flask App with Docker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: 🔍 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: ✅ Lint and Test (Optional)
+      run: |
+        echo "No tests configured yet"
+
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: 🔧 Build Docker Image
+      run: |
+        docker build -t houseprice-app .
+
+    # OPTIONAL: Push to DockerHub (requires DockerHub credentials)
+    # - name: 🔐 Login to DockerHub
+    #   uses: docker/login-action@v2
+    #   with:
+    #     username: ${{ secrets.DOCKER_USERNAME }}
+    #     password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # - name: 🚀 Push to DockerHub
+    #   run: |
+    #     docker tag houseprice-app ${{ secrets.DOCKER_USERNAME }}/houseprice-app:latest
+    #     docker push ${{ secrets.DOCKER_USERNAME }}/houseprice-app:latest
+
+    # OPTIONAL: Deploy to Render using their deploy hook (replace with your Render deploy hook)
+    - name: 🚀 Deploy to Render
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+    # OPTIONAL: Deploy to Heroku (if using Heroku + Docker)
+    # - name: 🔐 Login to Heroku
+    #   env:
+    #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    #   run: |
+    #     echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+
+    # - name: 🚀 Push Docker to Heroku
+    #   run: |
+    #     heroku container:push web --app your-heroku-app-name
+    #     heroku container:release web --app your-heroku-app-name
