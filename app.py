@@ -23,7 +23,12 @@ def predict():
         data = [float(x) for x in request.form.values()]
         final_input = scalar.transform(np.array(data).reshape(1, -1))
         output = regmodel.predict(final_input)[0]
-        return render_template("home.html", prediction_text=f"The predicted price of the house is $ {output:.2f}")
+        # Multiply back
+        price_dollars = output * 100000
+
+        # In your template
+        return render_template("home.html", prediction_text=f"The predicted price of the house is ${price_dollars:,.2f}")
+
     except Exception as e:
         return render_template("home.html", prediction_text=f"Error: {str(e)}")
 

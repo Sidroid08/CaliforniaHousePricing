@@ -1,3 +1,95 @@
-<h1>
-  hello world
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>California House Price Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #dce35b, #45b649);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #45b649;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #3d9e40;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+        .result {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>California House Price Predictor</h2>
+        <form action="/predict" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Median Income</label>
+                <input type="number" step="any" name="MedInc" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">House Age</label>
+                <input type="number" step="any" name="HouseAge" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Average Rooms</label>
+                <input type="number" step="any" name="AveRooms" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Average Bedrooms</label>
+                <input type="number" step="any" name="AveBedrms" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Population</label>
+                <input type="number" step="any" name="Population" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Average Occupants</label>
+                <input type="number" step="any" name="AveOccup" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Latitude</label>
+                <input type="number" step="any" name="Latitude" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Longitude</label>
+                <input type="number" step="any" name="Longitude" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
