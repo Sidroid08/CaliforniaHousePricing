@@ -24,10 +24,115 @@ You can set up your Python environment using either **Conda** or **venv** (built
 
 #### ⚙️ Steps:
 
-1. Open terminal inside the project folder:
+1. **Open terminal inside the project folder:**
    ```bash
    cd CaliforniaHousePricing
+   ```
 
+2. **Create a new conda environment:**
+   ```bash
+   conda create -n california-housing python=3.9
+   ```
 
+3. **Activate the environment:**
+   ```bash
+   conda activate california-housing
+   ```
 
+4. **Install required packages:**
+   ```bash
+   # Install data science packages
+   conda install pandas numpy matplotlib seaborn scikit-learn jupyter
 
+   # Install web framework (if using Flask/Django)
+   conda install flask
+
+   # Install additional packages via pip if needed
+   pip install streamlit plotly
+   ```
+
+5. **Create requirements.txt file:**
+   ```bash
+   conda list --export > requirements.txt
+   ```
+
+6. **Verify installation:**
+   ```bash
+   python --version
+   conda list
+   ```
+
+---
+
+### 🐍 Option 2: Using `venv` (Built-in Python Virtual Environment)
+
+#### ✅ Prerequisites:
+- Python 3.7+ installed on your system
+- `python` command available in terminal
+
+#### ⚙️ Steps:
+
+1. **Open terminal inside the project folder:**
+   ```bash
+   cd CaliforniaHousePricing
+   ```
+
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv california-housing-env
+   ```
+
+3. **Activate the virtual environment:**
+   
+   **On Windows:**
+   ```bash
+   california-housing-env\Scripts\activate
+   ```
+   
+   **On macOS/Linux:**
+   ```bash
+   source california-housing-env/bin/activate
+   ```
+
+4. **Upgrade pip:**
+   ```bash
+   pip install --upgrade pip
+   ```
+
+5. **Install required packages:**
+   ```bash
+   pip install pandas numpy matplotlib seaborn scikit-learn jupyter flask streamlit plotly
+   ```
+
+6. **Create requirements.txt file:**
+   ```bash
+   pip freeze > requirements.txt
+   ```
+
+7. **Verify installation:**
+   ```bash
+   python --version
+   pip list
+   ```
+
+---
+
+## 📋 Required Python Packages
+
+The following packages are essential for the California House Pricing project:
+
+### Core Data Science Libraries
+- **pandas** - Data manipulation and analysis
+- **numpy** - Numerical computing
+- **matplotlib** - Data visualization
+- **seaborn** - Statistical data visualization
+- **scikit-learn** - Machine learning library
+
+### Web Development (Optional)
+- **flask** - Lightweight web framework
+- **streamlit** - For creating web apps quickly
+- **plotly** - Interactive visualizations
+
+### Development Tools
+- **jupyter** - Interactive notebooks
+- **ipython** - Enhanced interactive Python shell
